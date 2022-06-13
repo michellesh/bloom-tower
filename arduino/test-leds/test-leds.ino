@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
+#define BRIGHTNESS 255
 #define LED_TYPE WS2813
 #define COLOR_ORDER GRB
 
@@ -62,7 +63,7 @@ void setup() {
     offset += level.numLEDs;
   }
 
-  FastLED.setBrightness(50);  // min = 0, max = 255
+  FastLED.setBrightness(BRIGHTNESS);
 }
 
 void loop() {
