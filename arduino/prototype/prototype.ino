@@ -94,9 +94,6 @@ void setup() {
   for (uint8_t d = 0; d < NUM_DISCS; d++) {
     Disc disc = {d,
                  NUM_LEDS_DISC[d],
-                 NUM_LEDS_PETAL[d][0],
-                 NUM_LEDS_PETAL[d][1],
-                 NUM_LEDS_PETAL[d][2],
                  MAX_RADIUS_DISC[d],
                  &leds[offset],
                  &ledBrightness[offset]};

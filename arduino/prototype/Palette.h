@@ -21,8 +21,7 @@ class Palette {
   static const uint8_t VERTICAL_GRADIENT = 1;
   static const uint8_t RADIUS_GRADIENT = 2;
   static const uint8_t ANGLE_GRADIENT = 3;
-  static const uint8_t PETAL_GRADIENT = 4;
-  static const uint8_t PATCHY = 5;
+  static const uint8_t PATCHY = 4;
 
   uint8_t getActiveColorMode() { return _activeColorMode; }
 
@@ -57,17 +56,6 @@ class Palette {
       }
       case ANGLE_GRADIENT: {
         paletteIndex = map(discs[d].angle(p), 0, 360, 0, MAX_PALETTE_INDEX);
-        break;
-      }
-      case PETAL_GRADIENT: {
-        if (discs[d].isInner(p)) {
-          paletteIndex = map(discs[d].petalIndex(p), 0,
-                             discs[d].numLEDsP1 + discs[d].numLEDsP2 - 1, 0,
-                             MAX_PALETTE_INDEX / 2);
-        } else {
-          paletteIndex = map(discs[d].petalIndex(p), 0, discs[d].numLEDsP3 - 1,
-                             MAX_PALETTE_INDEX, MAX_PALETTE_INDEX / 2);
-        }
         break;
       }
       case PATCHY: {
