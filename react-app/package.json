@@ -1,6 +1,5 @@
 {
-  "name": "tree-of-light",
-  "homepage": "https://michellesh.github.io/tree-of-light",
+  "name": "react-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
