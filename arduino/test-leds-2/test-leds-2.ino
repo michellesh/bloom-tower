@@ -6,8 +6,6 @@
 #define LED_TYPE WS2813
 #define COLOR_ORDER GRB
 
-#define NUM_LEVELS 7
-
 #define PIN_1 2
 #define PIN_2 4
 #define PIN_3 5
@@ -58,24 +56,11 @@ void setup() {
 void loop() {
   for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::Red;
-  }
-  for (int i = 0; i < NUM_LEDS; i++) {
     leds2[i] = CRGB::Orange;
-  }
-  for (int i = 0; i < NUM_LEDS; i++) {
     leds3[i] = CRGB::Yellow;
-  }
-  for (int i = 0; i < NUM_LEDS; i++) {
     leds4[i] = CRGB::Green;
-  }
-  for (int i = 0; i < NUM_LEDS; i++) {
     leds5[i] = CRGB::Blue;
-  }
-  for (int i = 0; i < NUM_LEDS; i++) {
     leds6[i] = CRGB::Purple;
-  }
-  for (int i = 0; i < NUM_LEDS; i++) {
-    leds6[i] = CRGB::White;
   }
   FastLED.show();
 }

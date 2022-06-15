@@ -21,10 +21,8 @@ int NUM_LEDS[] = {1000, 800, 600, 400, 300, 200, 100};
 int NUM_LEDS_TOTAL = NUM_LEDS[0] + NUM_LEDS[1] + NUM_LEDS[2] + NUM_LEDS[3] +
                      NUM_LEDS[4] + NUM_LEDS[5] + NUM_LEDS[6];
 
-CRGB colors[] = {
-    CRGB::Lavender,  CRGB::Coral, CRGB::Chocolate, CRGB::Maroon,
-    CRGB::Chocolate, CRGB::Coral, CRGB::Lavender,
-};
+CRGB colors[] = {CRGB::Red,  CRGB::Orange, CRGB::Yellow, CRGB::Green,
+                 CRGB::Cyan, CRGB::Blue,   CRGB::Purple};
 
 struct Level {
   int levelIndex;
@@ -42,19 +40,33 @@ void setup() {
   leds = new CRGB[NUM_LEDS_TOTAL];
 
   int startIndex = 0;
-  FastLED.addLeds<LED_TYPE, PIN_1, COLOR_ORDER>(leds, startIndex, NUM_LEDS[0]);
+  FastLED.addLeds<LED_TYPE, PIN_1, COLOR_ORDER>(leds, startIndex, NUM_LEDS[0])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
   startIndex += NUM_LEDS[0];
-  FastLED.addLeds<LED_TYPE, PIN_2, COLOR_ORDER>(leds, startIndex, NUM_LEDS[1]);
+  FastLED.addLeds<LED_TYPE, PIN_2, COLOR_ORDER>(leds, startIndex, NUM_LEDS[1])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
   startIndex += NUM_LEDS[1];
-  FastLED.addLeds<LED_TYPE, PIN_3, COLOR_ORDER>(leds, startIndex, NUM_LEDS[2]);
+  FastLED.addLeds<LED_TYPE, PIN_3, COLOR_ORDER>(leds, startIndex, NUM_LEDS[2])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
   startIndex += NUM_LEDS[2];
-  FastLED.addLeds<LED_TYPE, PIN_4, COLOR_ORDER>(leds, startIndex, NUM_LEDS[3]);
+  FastLED.addLeds<LED_TYPE, PIN_4, COLOR_ORDER>(leds, startIndex, NUM_LEDS[3])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
   startIndex += NUM_LEDS[3];
-  FastLED.addLeds<LED_TYPE, PIN_5, COLOR_ORDER>(leds, startIndex, NUM_LEDS[4]);
+  FastLED.addLeds<LED_TYPE, PIN_5, COLOR_ORDER>(leds, startIndex, NUM_LEDS[4])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
   startIndex += NUM_LEDS[4];
-  FastLED.addLeds<LED_TYPE, PIN_6, COLOR_ORDER>(leds, startIndex, NUM_LEDS[5]);
+  FastLED.addLeds<LED_TYPE, PIN_6, COLOR_ORDER>(leds, startIndex, NUM_LEDS[5])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
   startIndex += NUM_LEDS[5];
-  FastLED.addLeds<LED_TYPE, PIN_7, COLOR_ORDER>(leds, startIndex, NUM_LEDS[6]);
+  FastLED.addLeds<LED_TYPE, PIN_7, COLOR_ORDER>(leds, startIndex, NUM_LEDS[6])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
 
   int offset = 0;
   for (int i = 0; i < NUM_LEVELS; i++) {
