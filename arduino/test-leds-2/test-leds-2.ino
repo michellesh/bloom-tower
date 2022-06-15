@@ -20,23 +20,62 @@
 
 CRGB leds[NUM_LEDS];
 CRGB leds2[NUM_LEDS];
+CRGB leds3[NUM_LEDS];
+CRGB leds4[NUM_LEDS];
+CRGB leds5[NUM_LEDS];
+CRGB leds6[NUM_LEDS];
+CRGB leds7[NUM_LEDS];
 
 void setup() {
   Serial.begin(115200);
   delay(500);
 
-  FastLED.addLeds<LED_TYPE, PIN_1, COLOR_ORDER>(leds, NUM_LEDS);
-  FastLED.addLeds<LED_TYPE, PIN_2, COLOR_ORDER>(leds2, NUM_LEDS);
+  FastLED.addLeds<LED_TYPE, PIN_1, COLOR_ORDER>(leds, NUM_LEDS)
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  FastLED.addLeds<LED_TYPE, PIN_2, COLOR_ORDER>(leds2, NUM_LEDS)
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  FastLED.addLeds<LED_TYPE, PIN_3, COLOR_ORDER>(leds3, NUM_LEDS)
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  FastLED.addLeds<LED_TYPE, PIN_4, COLOR_ORDER>(leds4, NUM_LEDS)
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  FastLED.addLeds<LED_TYPE, PIN_5, COLOR_ORDER>(leds5, NUM_LEDS)
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  FastLED.addLeds<LED_TYPE, PIN_6, COLOR_ORDER>(leds6, NUM_LEDS)
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  FastLED.addLeds<LED_TYPE, PIN_7, COLOR_ORDER>(leds7, NUM_LEDS)
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
 
   FastLED.setBrightness(BRIGHTNESS);
 }
 
 void loop() {
   for (int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = CRGB::Blue;
+    leds[i] = CRGB::Red;
   }
   for (int i = 0; i < NUM_LEDS; i++) {
-    leds2[i] = CRGB::Red;
+    leds2[i] = CRGB::Orange;
+  }
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds3[i] = CRGB::Yellow;
+  }
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds4[i] = CRGB::Green;
+  }
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds5[i] = CRGB::Blue;
+  }
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds6[i] = CRGB::Purple;
+  }
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds6[i] = CRGB::White;
   }
   FastLED.show();
 }
