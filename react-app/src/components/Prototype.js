@@ -1,64 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { BACKGROUND_COLOR, WIDTH, HEIGHT } from 'const';
 import * as animations from 'animations';
 import { useCanvas } from 'hooks';
-import { DISCS } from 'models/Discs';
-import { LED } from 'models/LED';
+import { LEVELS } from 'models/Level';
 import { getStrDiscRadii, getStrDiscAngles } from 'utils';
 
 const Container = styled.div`
   background-color: ${BACKGROUND_COLOR};
   height: 100%;
   text-align: center;
+  border: 1px solid #000;
 `;
 
-console.log('Total LED count:',
-  DISCS.reduce((acc, disc) => acc + disc.allLeds.length, 0)
+console.log(
+  'Total LED count:',
+  LEVELS.reduce((acc, level) => acc + level.allLeds.length, 0)
 );
-console.log('DISCS', DISCS);
-console.log(getStrDiscRadii(DISCS));
-console.log(getStrDiscAngles(DISCS));
-
-const animationList = ['Ripple', 'Juggle', 'Stop'];
+console.log('LEVELS', LEVELS);
+console.log(getStrDiscRadii(LEVELS));
+console.log(getStrDiscAngles(LEVELS));
 
 const Prototype = () => {
   const [canvasRef, context] = useCanvas();
-  const [animation, setAnimation] = useState(0);
 
   useEffect(() => {
     if (window.reqId) {
       window.cancelAnimationFrame(window.reqId);
     }
     if (context) {
-      animations.showLEDs(context, DISCS);
-      LED({ x: 537.5, y: 872 }).radius(5).draw(context);
-      DISCS[8].allLeds.forEach((led, i) => {
-        context.fillText(DISCS[8].angles[i], led.x, led.y);
-      });
-      switch (animation) {
-        case 'Ripple':
-          //animations.ripple(context, DISCS);
-          //animations.petalRipple(context, DISCS);
-          animations.radiusRipple(context, DISCS);
-          break;
-        case 'Juggle':
-          animations.juggle(context, DISCS);
-          break;
-        default:
-          break;
-      }
+      animations.ripple(context, LEVELS);
+
+      //animations.showLEDs(context, LEVELS);
+
+      // Output each angle value as text to verify they are correct
+      //context.fillStyle = 'white';
+      //LEVELS.forEach(level =>
+      //  level.allLeds.forEach((led, i) => {
+      //    context.fillText(level.angles[i], led.x, led.y);
+      //  })
+      //);
     }
-  }, [animation, context]);
+  }, [context]);
 
   return (
     <Container>
-      {animationList.map((animation, i) => (
-        <button key={i} onClick={() => setAnimation(animation)}>
-          {animation}
-        </button>
-      ))}
       <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} />
     </Container>
   );
