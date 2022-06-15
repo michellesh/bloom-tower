@@ -6,7 +6,7 @@ struct Disc {
   uint8_t *brightness;  // the brightness of the LEDs for this disc
 
   int16_t radius(uint8_t pixelIndex) {
-    return RADII[discIndex][pixelIndex % (numLEDs / NUM_PETAL_GROUPS)];
+    return RADII[discIndex][pixelIndex % (numLEDs / NUM_SIDES)];
   }
 
   int16_t angle(uint8_t pixelIndex) { return ANGLES[discIndex][pixelIndex]; }

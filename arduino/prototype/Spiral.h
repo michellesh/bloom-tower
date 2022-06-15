@@ -4,11 +4,10 @@ class Spiral : public Pattern {
   int16_t _angle = 0;  // the current angle
   int16_t _width = WIDTH.DFLT;
   int16_t _speed = SPEED.DFLT;
-  int16_t _discOffset[NUM_DISCS] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-  uint8_t _minRadius[NUM_DISCS] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-  uint8_t _maxRadius[NUM_DISCS] = {100, 100, 100, 100, 100, 100, 100, 100, 100};
-  uint8_t _heightBrightness[NUM_DISCS] = {255, 255, 255, 255, 255,
-                                          255, 255, 255, 255};
+  int16_t _discOffset[NUM_DISCS] = {0, 0, 0, 0, 0, 0, 0};
+  uint8_t _minRadius[NUM_DISCS] = {0, 0, 0, 0, 0, 0, 0};
+  uint8_t _maxRadius[NUM_DISCS] = {100, 100, 100, 100, 100, 100, 100};
+  uint8_t _heightBrightness[NUM_DISCS] = {255, 255, 255, 255, 255, 255, 255};
 
   // Gets the brightness of the LED if the LED's angle is close to the current
   // angle

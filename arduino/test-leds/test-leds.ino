@@ -17,7 +17,7 @@
 #define PIN_7 18
 
 // TODO change these numbers to the real ones
-int NUM_LEDS[] = {1000, 800, 600, 400, 300, 200, 100};
+int NUM_LEDS[] = {100, 200, 300, 400, 600, 800, 1000};
 int NUM_LEDS_TOTAL = NUM_LEDS[0] + NUM_LEDS[1] + NUM_LEDS[2] + NUM_LEDS[3] +
                      NUM_LEDS[4] + NUM_LEDS[5] + NUM_LEDS[6];
 

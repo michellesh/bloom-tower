@@ -1,5 +1,9 @@
-#define NUM_DISCS 9
-#define NUM_PETAL_GROUPS 6
+#define BRIGHTNESS 255
+#define LED_TYPE WS2813
+#define COLOR_ORDER GRB
+
+#define NUM_DISCS 7
+#define NUM_SIDES 4
 
 #define PIN_1 2
 #define PIN_2 4
@@ -9,36 +13,16 @@
 #define PIN_6 14
 #define PIN_7 18
 
-#define NUM_LEDS_PIN_1 200
-#define NUM_LEDS_PIN_2 184
-#define NUM_LEDS_PIN_3 196
-#define NUM_LEDS_PIN_4 202
-#define NUM_LEDS_PIN_5 198
-#define NUM_LEDS_PIN_6 190
-#define NUM_LEDS_PIN_7 114
-
 // Incremented once per iteration of the loop
 unsigned long ticks = 0;
 
-CRGB LEDS_PIN_1[NUM_LEDS_PIN_1];
-CRGB LEDS_PIN_2[NUM_LEDS_PIN_2];
-CRGB LEDS_PIN_3[NUM_LEDS_PIN_3];
-CRGB LEDS_PIN_4[NUM_LEDS_PIN_4];
-CRGB LEDS_PIN_5[NUM_LEDS_PIN_5];
-CRGB LEDS_PIN_6[NUM_LEDS_PIN_6];
-CRGB LEDS_PIN_7[NUM_LEDS_PIN_7];
-
-int16_t NUM_LEDS_TOTAL = NUM_LEDS_PIN_1 + NUM_LEDS_PIN_2 + NUM_LEDS_PIN_3 +
-                         NUM_LEDS_PIN_4 + NUM_LEDS_PIN_5 + NUM_LEDS_PIN_6 +
-                         NUM_LEDS_PIN_7;
-
-uint8_t NUM_LEDS_DISC[] = {240, 216, 186, 168, 150, 120, 90, 72, 42};
+// TODO change these numbers to the real ones
+// should be ordered top/smallest level -> bottom/largest level
+int16_t NUM_LEDS[] = {100, 200, 300, 400, 600, 800, 1000};
+int16_t NUM_LEDS_TOTAL = NUM_LEDS[0] + NUM_LEDS[1] + NUM_LEDS[2] + NUM_LEDS[3] +
+                         NUM_LEDS[4] + NUM_LEDS[5] + NUM_LEDS[6];
 
 uint8_t PERCENT_HEIGHT_DISC[] = {100, 89, 78, 67, 56, 45, 34, 23, 12};
-
-uint8_t NUM_LEDS_PETAL[NUM_DISCS][3] = {{8, 10, 6}, {8, 9, 5}, {7, 7, 5},
-                                        {6, 7, 4},  {5, 6, 4}, {4, 5, 3},
-                                        {3, 4, 2},  {2, 3, 2}, {1, 2, 1}};
 
 // Generated from javascript prototype
 int16_t RADII_DISC_0[] = {27,  42,  56,  71,  86,  101, 115, 130, 142, 151,

@@ -76,26 +76,39 @@ void setup() {
   logMemory();
 
   uint16_t startIndex = 0;
-  FastLED.addLeds<NEOPIXEL, PIN_1>(leds, startIndex, NUM_LEDS_PIN_1);
-  startIndex += NUM_LEDS_PIN_1;
-  FastLED.addLeds<NEOPIXEL, PIN_2>(leds, startIndex, NUM_LEDS_PIN_2);
-  startIndex += NUM_LEDS_PIN_2;
-  FastLED.addLeds<NEOPIXEL, PIN_3>(leds, startIndex, NUM_LEDS_PIN_3);
-  startIndex += NUM_LEDS_PIN_3;
-  FastLED.addLeds<NEOPIXEL, PIN_4>(leds, startIndex, NUM_LEDS_PIN_4);
-  startIndex += NUM_LEDS_PIN_4;
-  FastLED.addLeds<NEOPIXEL, PIN_5>(leds, startIndex, NUM_LEDS_PIN_5);
-  startIndex += NUM_LEDS_PIN_5;
-  FastLED.addLeds<NEOPIXEL, PIN_6>(leds, startIndex, NUM_LEDS_PIN_6);
-  startIndex += NUM_LEDS_PIN_6;
-  FastLED.addLeds<NEOPIXEL, PIN_7>(leds, startIndex, NUM_LEDS_PIN_7);
+  // TODO This assumes PIN_1 is the top/smallest level (disc)
+  // If PIN_1 is the bottom/largest level (disc), reverse the pin order here:
+  FastLED.addLeds<LED_TYPE, PIN_1, COLOR_ORDER>(leds, startIndex, NUM_LEDS[0])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  startIndex += NUM_LEDS[0];
+  FastLED.addLeds<LED_TYPE, PIN_2, COLOR_ORDER>(leds, startIndex, NUM_LEDS[1])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  startIndex += NUM_LEDS[1];
+  FastLED.addLeds<LED_TYPE, PIN_3, COLOR_ORDER>(leds, startIndex, NUM_LEDS[2])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  startIndex += NUM_LEDS[2];
+  FastLED.addLeds<LED_TYPE, PIN_4, COLOR_ORDER>(leds, startIndex, NUM_LEDS[3])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  startIndex += NUM_LEDS[3];
+  FastLED.addLeds<LED_TYPE, PIN_5, COLOR_ORDER>(leds, startIndex, NUM_LEDS[4])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  startIndex += NUM_LEDS[4];
+  FastLED.addLeds<LED_TYPE, PIN_6, COLOR_ORDER>(leds, startIndex, NUM_LEDS[5])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
+  startIndex += NUM_LEDS[5];
+  FastLED.addLeds<LED_TYPE, PIN_7, COLOR_ORDER>(leds, startIndex, NUM_LEDS[6])
+      .setCorrection(TypicalLEDStrip)
+      .setDither(BRIGHTNESS < 255);
 
   uint16_t offset = 0;
   for (uint8_t d = 0; d < NUM_DISCS; d++) {
-    Disc disc = {d,
-                 NUM_LEDS_DISC[d],
-                 MAX_RADIUS_DISC[d],
-                 &leds[offset],
+    Disc disc = {d, NUM_LEDS[d], MAX_RADIUS_DISC[d], &leds[offset],
                  &ledBrightness[offset]};
 
     discs[d] = disc;
