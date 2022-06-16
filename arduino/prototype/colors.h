@@ -4,6 +4,9 @@ CRGB campfire[] = {
     CRGB::Chocolate,   CRGB::Coral,     CRGB::Lavender,
 };
 
+CRGB chakra[] = {CRGB::Purple, CRGB::Blue,   CRGB::Cyan, CRGB::Green,
+                 CRGB::Yellow, CRGB::Orange, CRGB::Red};
+
 DEFINE_GRADIENT_PALETTE(_firePalette){0,   0,   0,   0,   // black
                                       128, 255, 0,   0,   // red
                                       200, 255, 140, 0,   // CRGB::Orange

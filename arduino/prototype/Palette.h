@@ -4,7 +4,7 @@ class Palette {
  private:
   CRGBPalette16 _currentPalette = *(activePalettes[0]);
   CRGBPalette16 _targetPalette = *(activePalettes[0]);
-  uint8_t _activeColorMode = PATCHY;
+  uint8_t _activeColorMode = CHAKRA;
   uint8_t _secondsPerPalette = 10;
 
   void _setNextColorPalette() {
@@ -22,6 +22,7 @@ class Palette {
   static const uint8_t RADIUS_GRADIENT = 2;
   static const uint8_t ANGLE_GRADIENT = 3;
   static const uint8_t PATCHY = 4;
+  static const uint8_t CHAKRA = 5;
 
   uint8_t getActiveColorMode() { return _activeColorMode; }
 
@@ -67,6 +68,8 @@ class Palette {
         paletteIndex = r + g + b;  // CRGB(r, g, b)
         break;
       }
+      case CHAKRA:
+        return chakra[d];
       default:
         break;
     }
