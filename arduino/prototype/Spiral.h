@@ -11,7 +11,7 @@ class Spiral : public Pattern {
 
   // Gets the brightness of the LED if the LED's angle is close to the current
   // angle
-  uint8_t _getBrightness(uint8_t d, uint8_t p) {
+  uint8_t _getBrightness(uint8_t d, uint16_t p) {
     if (!isBetween(discs[d].radius(p), _minRadius[d], _maxRadius[d])) {
       return 0;
     }
@@ -85,7 +85,7 @@ class Spiral : public Pattern {
 
   void show() {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
-      for (uint8_t p = 0; p < discs[d].numLEDs; p++) {
+      for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
         uint8_t brightness = _getBrightness(d, p);
         if (brightness > 0) {
           CRGB color = palette.getColor(_id * 2).nscale8(

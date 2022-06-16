@@ -198,7 +198,7 @@ void demoColorModes() {
   }
   FastLED.setBrightness(50);
   for (uint8_t d = 0; d < NUM_DISCS; d++) {
-    for (uint8_t p = 0; p < discs[d].numLEDs; p++) {
+    for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
       discs[d].leds[p] = palette.getColor(d, p, true);
     }
   }

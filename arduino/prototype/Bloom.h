@@ -19,7 +19,7 @@ class Ripple {
     _colorIndex = (_colorIndex + NUM_DISCS + (colorInc * 2)) % NUM_DISCS;
   }
 
-  uint8_t _getBrightness(uint8_t p, int16_t width) {
+  uint8_t _getBrightness(uint16_t p, int16_t width) {
     int16_t dist = _radius - discs[_discIndex].radius(p);
     return isBetween(dist, 0, width) ? addFadeShape(map(dist, 0, width, 0, 255))
                                      : 0;
@@ -47,7 +47,7 @@ class Ripple {
   }
 
   void show(int16_t width, uint8_t percentBrightness) {
-    for (uint8_t p = 0; p < discs[_discIndex].numLEDs; p++) {
+    for (uint16_t p = 0; p < discs[_discIndex].numLEDs; p++) {
       uint8_t brightness = _getBrightness(p, width);
       if (brightness > 0) {
         CRGB color = palette.getColor(_colorIndex)

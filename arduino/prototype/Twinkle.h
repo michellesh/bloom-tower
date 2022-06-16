@@ -28,7 +28,7 @@ class Twinkle : public Pattern {
     uint32_t clock32 = millis();
 
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
-      for (uint8_t p = 0; p < discs[d].numLEDs; p++) {
+      for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
         // Use pseudo random number generator to get values for the clock speed
         // adjustment and clock offset of this pixel
         PRNG16 = (uint16_t)(PRNG16 * 2053) + 1384;  // next 'random' number
@@ -60,7 +60,7 @@ class Twinkle : public Pattern {
     uint32_t clock32 = millis();
 
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
-      for (uint8_t p = 0; p < discs[d].numLEDs; p += SEGMENT_LENGTH) {
+      for (uint16_t p = 0; p < discs[d].numLEDs; p += SEGMENT_LENGTH) {
         // Use pseudo random number generator to get values for the clock speed
         // adjustment and clock offset of this pixel
         PRNG16 = (uint16_t)(PRNG16 * 2053) + 1384;  // next 'random' number
@@ -83,7 +83,7 @@ class Twinkle : public Pattern {
         CRGB color = palette.getColor(d, p).nscale8(
             brightness * getPercentBrightness() / 100);
 
-        for (uint8_t p2 = p; p2 < p + SEGMENT_LENGTH; p++) {
+        for (uint16_t p2 = p; p2 < p + SEGMENT_LENGTH; p++) {
           if (p2 < discs[d].numLEDs) {
             discs[d].setBlend(p2, color, brightness);
           }

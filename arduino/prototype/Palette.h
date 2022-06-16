@@ -36,14 +36,12 @@ class Palette {
     }
   }
 
-  CRGB getPixelColor(uint8_t p) { return ColorFromPalette(_currentPalette, p); }
-
   CRGB getColor(uint8_t d) {
     uint8_t paletteIndex = map(d, 0, NUM_DISCS - 1, 0, MAX_PALETTE_INDEX);
     return ColorFromPalette(_currentPalette, paletteIndex);
   }
 
-  CRGB getColor(uint8_t d, uint8_t p, bool reversePalette = false) {
+  CRGB getColor(uint8_t d, uint16_t p, bool reversePalette = false) {
     uint8_t paletteIndex = 0;
     switch (_activeColorMode) {
       case VERTICAL_GRADIENT: {
