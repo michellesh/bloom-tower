@@ -7,9 +7,13 @@ import { LED } from 'models/LED';
 const center = { x: WIDTH / 2, y: HEIGHT / 2 };
 
 const NUM_LEVELS = 7;
-const LEVEL_EDGE_LEN_FT = [10, 8, 6, 4, 3, 2, 1];
-const NUM_LEDS_PER_EDGE = [100, 80, 60, 40, 30, 20, 10];
-const MAX_EDGE_LEN_PX = 600;
+const LEVEL_EDGE_LEN_FT = [1, 2, 3, 4, 6, 8, 10];
+const METERS_PER_FOOT = 0.3048;
+const LEDS_PER_METER = 144;
+const NUM_LEDS_PER_EDGE = LEVEL_EDGE_LEN_FT.map(
+  x => x * METERS_PER_FOOT * LEDS_PER_METER
+);
+const MAX_EDGE_LEN_PX = 355;
 
 const ftToPx = d3
   .scaleLinear()

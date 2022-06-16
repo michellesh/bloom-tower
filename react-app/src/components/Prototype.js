@@ -5,7 +5,7 @@ import { BACKGROUND_COLOR, WIDTH, HEIGHT } from 'const';
 import * as animations from 'animations';
 import { useCanvas } from 'hooks';
 import { LEVELS } from 'models/Level';
-import { getStrDiscRadii, getStrDiscAngles } from 'utils';
+import { getStrDiscRadii, getStrDiscAngles, getStrMaxRadius } from 'utils';
 
 const Container = styled.div`
   background-color: ${BACKGROUND_COLOR};
@@ -15,11 +15,16 @@ const Container = styled.div`
 `;
 
 console.log(
+  'LEDs per level:\n',
+  LEVELS.map(level => level.allLeds.length)
+);
+console.log(
   'Total LED count:',
   LEVELS.reduce((acc, level) => acc + level.allLeds.length, 0)
 );
 console.log('LEVELS', LEVELS);
 console.log(getStrDiscRadii(LEVELS));
+console.log(getStrMaxRadius(LEVELS));
 console.log(getStrDiscAngles(LEVELS));
 
 const Prototype = () => {
@@ -30,9 +35,9 @@ const Prototype = () => {
       window.cancelAnimationFrame(window.reqId);
     }
     if (context) {
-      animations.ripple(context, LEVELS);
+      //animations.ripple(context, LEVELS);
 
-      //animations.showLEDs(context, LEVELS);
+      animations.showLEDs(context, LEVELS);
 
       // Output each angle value as text to verify they are correct
       //context.fillStyle = 'white';
