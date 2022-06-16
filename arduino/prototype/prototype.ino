@@ -26,7 +26,8 @@ Palette palette;
 #include "SpiralSubPattern.h"
 #include "TwinkleSubPattern.h"
 
-TwinkleSubPattern twinkle;
+TwinkleSubPattern twinkle(TwinkleSubPattern::ORIGINAL);
+TwinkleSubPattern twinkleExpandedPixel(TwinkleSubPattern::EXPANDED_PIXEL);
 
 BloomSubPattern bloomContinuous(BloomSubPattern::CONTINUOUS);
 BloomSubPattern bloomStartSame(BloomSubPattern::START_SAME);
@@ -44,6 +45,7 @@ SpiralSubPattern continuousSpiral(SpiralSubPattern::CONTINUOUS_SPIRAL);
 // clang-format off
 SubPattern *activePatterns[] = {
   &twinkle,
+  &twinkleExpandedPixel,
   &bloomContinuous,
   &bloomStartSame,
   &bloomEndSame,

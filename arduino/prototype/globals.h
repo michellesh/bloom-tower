@@ -4,6 +4,7 @@
 
 #define NUM_DISCS 7
 #define NUM_SIDES 4
+#define SEGMENT_LENGTH 44  // roughly the number of LEDs in a 1 ft segment
 
 #define PIN_1 2
 #define PIN_2 4
