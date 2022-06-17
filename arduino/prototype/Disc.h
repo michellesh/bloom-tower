@@ -11,6 +11,16 @@ struct Disc {
 
   int16_t angle(uint16_t pixelIndex) { return ANGLES[discIndex][pixelIndex]; }
 
+  // Returns a percentage of how close this pixel is to the corner of the
+  // disc/level, where the entire edge of the disc/level is 100%
+  uint8_t percentCorner(uint16_t pixelIndex) {
+    int numEdgeLEDs = (int)numLEDs / 4;
+    int edgePixelIndex = (int)pixelIndex % numEdgeLEDs;
+    int percentAlongEdge =
+        (100 * edgePixelIndex + numEdgeLEDs / 2) / numEdgeLEDs;
+    return percentAlongEdge < 50 ? percentAlongEdge : 100 - percentAlongEdge;
+  }
+
   void setBrighter(uint16_t pixelIndex, CRGB color, uint8_t colorBrightness) {
     if (colorBrightness > brightness[pixelIndex]) {
       leds[pixelIndex] = color;

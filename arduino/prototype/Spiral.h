@@ -98,4 +98,21 @@ class Spiral : public Pattern {
     // Increment the angle. After 360 degrees, start over at 0 degrees
     _angle = (_angle + _speed + 360) % 360;
   }
+
+  void showOverBackground() {
+    CRGB white = CRGB::White;
+    for (uint8_t d = 0; d < NUM_DISCS; d++) {
+      for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
+        uint8_t brightness = _getBrightness(d, p);
+        if (brightness > 0) {
+          brightness = map(brightness, 0, 255, BACKGROUND_BRIGHTNESS, 255);
+          CRGB color = white.nscale8(brightness * getPercentBrightness() / 100);
+          discs[d].setBlend(p, color, brightness);
+        }
+      }
+    }
+
+    // Increment the angle. After 360 degrees, start over at 0 degrees
+    _angle = (_angle + _speed + 360) % 360;
+  }
 };

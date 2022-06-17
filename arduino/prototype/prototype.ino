@@ -41,11 +41,16 @@ SpiralSubPattern rubberBandAnchored(SpiralSubPattern::RUBBER_BAND_ANCHORED);
 SpiralSubPattern growingSpirals(SpiralSubPattern::GROWING_SPIRALS);
 SpiralSubPattern basicSpiralRotation(SpiralSubPattern::BASIC_SPIRAL_ROTATION);
 SpiralSubPattern continuousSpiral(SpiralSubPattern::CONTINUOUS_SPIRAL);
+SpiralSubPattern cornerChase(SpiralSubPattern::CORNER_CHASE);
 
 // clang-format off
 SubPattern *activePatterns[] = {
-  &twinkle,
+  // Added for Bloom Tower
   &twinkleExpandedPixel,
+  &cornerChase,
+
+  // Same from OG Bloom
+  &twinkle, // with lower density
   &bloomContinuous,
   &bloomStartSame,
   &bloomEndSame,

@@ -1,4 +1,4 @@
-#define MAX_SPIRALS 3
+#define MAX_SPIRALS 4
 
 class SpiralSubPattern : public SubPattern {
  private:
@@ -86,6 +86,29 @@ class SpiralSubPattern : public SubPattern {
     _spirals[0].show();
   }
 
+  void _showCornerChase() {
+    // Set background
+    for (uint8_t d = 0; d < NUM_DISCS; d++) {
+      for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
+        CRGB color = palette.getColor(d).nscale8(BACKGROUND_BRIGHTNESS *
+                                                 getPercentBrightness() / 100);
+        discs[d].setBlend(p, color, BACKGROUND_BRIGHTNESS);
+      }
+    }
+    unsigned long w = 100;  // waveLength
+    unsigned long wo = 33;  // waveLengthOffset
+    float min = sawtooth(-50, 150, w, wo);
+    float max = sawtooth(-50, 150, w);
+    _spirals[0].setHeightRangePercent(min, max);
+    _spirals[0].showOverBackground();
+    _spirals[1].setHeightRangePercent(min, max);
+    _spirals[1].showOverBackground();
+    _spirals[2].setHeightRangePercent(min, max);
+    _spirals[2].showOverBackground();
+    _spirals[3].setHeightRangePercent(min, max);
+    _spirals[3].showOverBackground();
+  }
+
  public:
   static const uint8_t RUBBER_BAND_WORM = 0;
   static const uint8_t RUBBER_BAND_NO_ANCHOR = 1;
@@ -93,6 +116,7 @@ class SpiralSubPattern : public SubPattern {
   static const uint8_t GROWING_SPIRALS = 3;
   static const uint8_t BASIC_SPIRAL_ROTATION = 4;
   static const uint8_t CONTINUOUS_SPIRAL = 5;
+  static const uint8_t CORNER_CHASE = 6;
 
   SpiralSubPattern(uint8_t activeSubPattern = 0) {
     _activeSubPattern = activeSubPattern;
@@ -146,6 +170,19 @@ class SpiralSubPattern : public SubPattern {
         _spirals[0].setRadiusRangePercent(50, 100);
         _spirals[0].setSpeed(3);
         break;
+      case CORNER_CHASE: {
+        _numSpirals = 4;
+        uint8_t spiralWidth = 30;
+        for (uint8_t i = 0; i < _numSpirals; i++) {
+          _spirals[i] = Spiral(i + 1);
+          _spirals[i].setWidth(spiralWidth);
+          _spirals[i].setRadiusRangePercent(50, 100);
+          _spirals[i].setSpeed(0);
+          // Position each "spiral" on the four "corners"
+          // (75 = 90 - 15), bc 15 is half of width
+          _spirals[i].setAngle((i * 90 + (90 - spiralWidth / 2)) % 360);
+        }
+      } break;
       default:
         break;
     }
@@ -179,6 +216,9 @@ class SpiralSubPattern : public SubPattern {
         break;
       case CONTINUOUS_SPIRAL:
         _showContinuousSpiral();
+        break;
+      case CORNER_CHASE:
+        _showCornerChase();
         break;
       default:
         break;
