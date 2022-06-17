@@ -86,7 +86,7 @@ class SpiralSubPattern : public SubPattern {
     _spirals[0].show();
   }
 
-  void _showCornerChase() {
+  void _showCornerChase(bool reverse) {
     // Set background
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
       for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
@@ -97,8 +97,14 @@ class SpiralSubPattern : public SubPattern {
     }
     unsigned long w = 100;  // waveLength
     unsigned long wo = 33;  // waveLengthOffset
-    float min = sawtooth(-50, 150, w, wo);
-    float max = sawtooth(-50, 150, w);
+    float min, max;
+    if (reverse) {
+      min = sawtooth(150, -50, w, wo);
+      max = sawtooth(150, -50, w);
+    } else {
+      min = sawtooth(-50, 150, w, wo);
+      max = sawtooth(-50, 150, w);
+    }
     _spirals[0].setHeightRangePercent(min, max);
     _spirals[0].showOverBackground();
     _spirals[1].setHeightRangePercent(min, max);
@@ -117,6 +123,7 @@ class SpiralSubPattern : public SubPattern {
   static const uint8_t BASIC_SPIRAL_ROTATION = 4;
   static const uint8_t CONTINUOUS_SPIRAL = 5;
   static const uint8_t CORNER_CHASE = 6;
+  static const uint8_t CORNER_CHASE_REVERSE = 7;
 
   SpiralSubPattern(uint8_t activeSubPattern = 0) {
     _activeSubPattern = activeSubPattern;
@@ -170,6 +177,7 @@ class SpiralSubPattern : public SubPattern {
         _spirals[0].setRadiusRangePercent(50, 100);
         _spirals[0].setSpeed(3);
         break;
+      case CORNER_CHASE_REVERSE:
       case CORNER_CHASE: {
         _numSpirals = 4;
         uint8_t spiralWidth = 30;
@@ -218,7 +226,10 @@ class SpiralSubPattern : public SubPattern {
         _showContinuousSpiral();
         break;
       case CORNER_CHASE:
-        _showCornerChase();
+        _showCornerChase(false);
+        break;
+      case CORNER_CHASE_REVERSE:
+        _showCornerChase(true);
         break;
       default:
         break;

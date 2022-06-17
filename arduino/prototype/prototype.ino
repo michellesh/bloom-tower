@@ -42,15 +42,17 @@ SpiralSubPattern growingSpirals(SpiralSubPattern::GROWING_SPIRALS);
 SpiralSubPattern basicSpiralRotation(SpiralSubPattern::BASIC_SPIRAL_ROTATION);
 SpiralSubPattern continuousSpiral(SpiralSubPattern::CONTINUOUS_SPIRAL);
 SpiralSubPattern cornerChase(SpiralSubPattern::CORNER_CHASE);
+SpiralSubPattern cornerChaseReverse(SpiralSubPattern::CORNER_CHASE_REVERSE);
 
 // clang-format off
 SubPattern *activePatterns[] = {
   // Added for Bloom Tower
-  &twinkleExpandedPixel,
-  &cornerChase,
+  &twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
+  &cornerChase, // light up corner (5%) and shoot upwards
+  &cornerChaseReverse, // light up corner (5%) and shoot upwards
 
   // Same from OG Bloom
-  &twinkle, // with lower density
+  &twinkle, // set with lower density
   &bloomContinuous,
   &bloomStartSame,
   &bloomEndSame,
