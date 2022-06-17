@@ -28,6 +28,7 @@ Palette palette;
 
 TwinkleSubPattern twinkle(TwinkleSubPattern::ORIGINAL);
 TwinkleSubPattern twinkleExpandedPixel(TwinkleSubPattern::EXPANDED_PIXEL);
+TwinkleSubPattern twinkleCorners(TwinkleSubPattern::CORNERS);
 
 BloomSubPattern bloomContinuous(BloomSubPattern::CONTINUOUS);
 BloomSubPattern bloomStartSame(BloomSubPattern::START_SAME);
@@ -48,11 +49,12 @@ SpiralSubPattern cornerChaseReverse(SpiralSubPattern::CORNER_CHASE_REVERSE);
 SubPattern *activePatterns[] = {
   // Added for Bloom Tower
   &twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
+  &twinkleCorners, // twinkle in corner 5%, everywhere else is a background color
   &cornerChase, // light up corner (5%) and shoot upwards
   &cornerChaseReverse, // light up corner (5%) and shoot upwards
 
   // Same from OG Bloom
-  &twinkle, // set with lower density
+  &twinkle, // set with lower density than OG Bloom
   &bloomContinuous,
   &bloomStartSame,
   &bloomEndSame,
