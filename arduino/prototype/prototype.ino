@@ -50,24 +50,24 @@ SpiralSubPattern cornerChaseReverse(SpiralSubPattern::CORNER_CHASE_REVERSE, WHIT
 // clang-format off
 SubPattern *activePatterns[] = {
   // Added for Bloom Tower
-  &twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
-  &twinkleCorners, // twinkle in corner 5%, everywhere else is a background color
-  &cornerChase, // light up corner (5%) and shoot upwards
-  &cornerChaseReverse, // light up corner (5%) and shoot upwards
+  //&twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
+  //&twinkleCorners, // twinkle in corner 5%, everywhere else is a background color
+  //&cornerChase, // light up corner (5%) and shoot upwards
+  //&cornerChaseReverse, // light up corner (5%) and shoot upwards
 
   // Same from OG Bloom
   &twinkle, // set with lower density than OG Bloom
-  &bloomContinuous,
-  &bloomStartSame,
-  &bloomEndSame,
-  &bloomUpward,
-  &bloomDownward,
-  &rubberBandWorm,
-  &rubberBandNoAnchor,
-  &rubberBandAnchored,
-  &growingSpirals,
-  &basicSpiralRotation,
-  &continuousSpiral
+  //&bloomContinuous,
+  //&bloomStartSame,
+  //&bloomEndSame,
+  //&bloomUpward,
+  //&bloomDownward,
+  //&rubberBandWorm,
+  //&rubberBandNoAnchor,
+  //&rubberBandAnchored,
+  //&growingSpirals,
+  //&basicSpiralRotation,
+  //&continuousSpiral
 };
 // clang-format on
 
@@ -144,11 +144,6 @@ void setup() {
 
 void loop() {
   clearLEDs();
-  twinkle.setPercentBrightness(100);
-  twinkle.show();
-
-  /*
-  clearLEDs();
   palette.cycle();
 
   EVERY_N_SECONDS(15) {
@@ -171,7 +166,6 @@ void loop() {
   }
 
   // demoColorModes();
-  */
 
   FastLED.show();
   ticks++;
