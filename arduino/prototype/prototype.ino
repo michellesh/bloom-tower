@@ -141,6 +141,7 @@ void setup() {
 }
 
 void loop() {
+  clearLEDs();
   twinkle.show();
 
   /*
