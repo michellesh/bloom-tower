@@ -16,13 +16,12 @@
 #define PIN_6 14
 #define PIN_7 18
 
-// TODO change these numbers to the real ones
-int NUM_LEDS[] = {100, 200, 300, 400, 600, 800, 1000};
+int NUM_LEDS[] = {176, 388, 544, 700, 1052, 1404, 1728};
 int NUM_LEDS_TOTAL = NUM_LEDS[0] + NUM_LEDS[1] + NUM_LEDS[2] + NUM_LEDS[3] +
                      NUM_LEDS[4] + NUM_LEDS[5] + NUM_LEDS[6];
 
-CRGB colors[] = {CRGB::Red,  CRGB::Orange, CRGB::Yellow, CRGB::Green,
-                 CRGB::Cyan, CRGB::Blue,   CRGB::Purple};
+CRGB colors[] = {CRGB::Purple, CRGB::Blue,   CRGB::Cyan, CRGB::Green,
+                 CRGB::Yellow, CRGB::Orange, CRGB::Red};
 
 struct Level {
   int levelIndex;
