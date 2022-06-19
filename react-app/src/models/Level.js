@@ -10,9 +10,7 @@ const NUM_LEVELS = 7;
 const LEVEL_EDGE_LEN_FT = [1, 2, 3, 4, 6, 8, 10];
 const METERS_PER_FOOT = 0.3048;
 const LEDS_PER_METER = 144;
-const NUM_LEDS_PER_EDGE = LEVEL_EDGE_LEN_FT.map(
-  x => x * METERS_PER_FOOT * LEDS_PER_METER
-);
+const NUM_LEDS_PER_EDGE = [44, 97, 136, 175, 263, 351, 432];
 const MAX_EDGE_LEN_PX = 355;
 
 const ftToPx = d3
