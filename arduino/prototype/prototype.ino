@@ -142,6 +142,7 @@ void setup() {
 
 void loop() {
   clearLEDs();
+  twinkle.setPercentBrightness(100);
   twinkle.show();
 
   /*
