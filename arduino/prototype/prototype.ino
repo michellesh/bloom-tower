@@ -141,6 +141,11 @@ void setup() {
 }
 
 void loop() {
+  for (int16_t i = 0; i < NUM_LEDS_TOTAL; i++) {
+    leds[i] = CRGB::Black;
+  }
+
+  /*
   clearLEDs();
   palette.cycle();
 
@@ -164,6 +169,7 @@ void loop() {
   }
 
   // demoColorModes();
+  */
 
   FastLED.show();
   ticks++;
