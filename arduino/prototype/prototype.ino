@@ -128,7 +128,7 @@ void setup() {
 
   // Initialize all LEDs to black
   for (int16_t i = 0; i < NUM_LEDS_TOTAL; i++) {
-    leds[i] = CRGB::Black;
+    leds[i] = CRGB::Green;
   }
 
   FastLED.setBrightness(100);
@@ -142,7 +142,7 @@ void setup() {
 
 void loop() {
   for (int16_t i = 0; i < NUM_LEDS_TOTAL; i++) {
-    leds[i] = CRGB::Black;
+    leds[i] = CRGB::Green;
   }
 
   /*
