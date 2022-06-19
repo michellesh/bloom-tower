@@ -128,7 +128,7 @@ void setup() {
 
   // Initialize all LEDs to black
   for (int16_t i = 0; i < NUM_LEDS_TOTAL; i++) {
-    leds[i] = CRGB::Green;
+    leds[i] = CRGB::Red;
   }
 
   FastLED.setBrightness(100);
@@ -141,9 +141,7 @@ void setup() {
 }
 
 void loop() {
-  for (int16_t i = 0; i < NUM_LEDS_TOTAL; i++) {
-    leds[i] = CRGB::Green;
-  }
+  twinkle.show();
 
   /*
   clearLEDs();
