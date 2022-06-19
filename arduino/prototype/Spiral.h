@@ -83,7 +83,17 @@ class Spiral : public Pattern {
     }
   }
 
-  void show() {
+  void show(uint8_t backgroundType = COLOR_ON_BLACK) {
+    if (backgroundType == COLOR_ON_BLACK) {
+      showColor();
+    } else if (backgroundType == WHITE_ON_COLOR) {
+      showWhite();
+    } else {
+      showBright();
+    }
+  }
+
+  void showColor() {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
       for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
         uint8_t brightness = _getBrightness(d, p);
@@ -99,7 +109,7 @@ class Spiral : public Pattern {
     _angle = (_angle + _speed + 360) % 360;
   }
 
-  void showOverBackground() {
+  void showWhite() {
     CRGB white = CRGB::White;
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
       for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
@@ -107,6 +117,22 @@ class Spiral : public Pattern {
         if (brightness > 0) {
           brightness = map(brightness, 0, 255, BACKGROUND_BRIGHTNESS, 255);
           CRGB color = white.nscale8(brightness * getPercentBrightness() / 100);
+          discs[d].setBlend(p, color, brightness);
+        }
+      }
+    }
+
+    // Increment the angle. After 360 degrees, start over at 0 degrees
+    _angle = (_angle + _speed + 360) % 360;
+  }
+
+  void showBright() {
+    for (uint8_t d = 0; d < NUM_DISCS; d++) {
+      for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
+        uint8_t brightness = _getBrightness(d, p);
+        if (brightness > BACKGROUND_BRIGHTNESS) {
+          CRGB color = palette.getColor(d).nscale8(
+              brightness * getPercentBrightness() / 100);
           discs[d].setBlend(p, color, brightness);
         }
       }

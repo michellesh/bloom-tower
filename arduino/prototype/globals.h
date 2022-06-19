@@ -15,6 +15,11 @@
 #define PIN_6 14
 #define PIN_7 18
 
+// Background types. How to show a pattern and over what kind of background
+#define COLOR_ON_BLACK 1  // default
+#define WHITE_ON_COLOR 2
+#define BRIGHT_ON_COLOR 3
+
 // Incremented once per iteration of the loop
 unsigned long ticks = 0;
 

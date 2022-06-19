@@ -6,6 +6,7 @@ class SpiralSubPattern : public SubPattern {
   uint8_t _numSpirals = MAX_SPIRALS;
   uint8_t _activeSubPattern = 0;
   uint8_t _percentBrightness = 0;  // percent brightness of the whole pattern
+  uint8_t _backgroundType = COLOR_ON_BLACK;
 
   void _showRubberBandWorm() {
     int16_t offset = sinwave(-90, 90, 100);
@@ -17,7 +18,7 @@ class SpiralSubPattern : public SubPattern {
       _spirals[0].setDiscOffset(d, d * offset);
       _spirals[0].setWidth(abs(width));
     }
-    _spirals[0].show();
+    _spirals[0].show(_backgroundType);
   }
 
   void _showRubberBandNoAnchor() {
@@ -30,7 +31,7 @@ class SpiralSubPattern : public SubPattern {
       _spirals[0].setDiscOffset(d, d * offset);
       _spirals[0].setWidth(abs(width));
     }
-    _spirals[0].show();
+    _spirals[0].show(_backgroundType);
   }
 
   void _showRubberBandAnchored() {
@@ -45,7 +46,7 @@ class SpiralSubPattern : public SubPattern {
       int16_t discOffset = mapf(d, toMin, toMax, 0, offset);
       _spirals[0].setDiscOffset(d, discOffset);
     }
-    _spirals[0].show();
+    _spirals[0].show(_backgroundType);
   }
 
   void _showGrowingSpirals() {
@@ -53,20 +54,20 @@ class SpiralSubPattern : public SubPattern {
     unsigned long wo = 33;  // waveLengthOffset
     _spirals[0].setHeightRangePercent(sawtooth(-50, 150, w, wo),
                                       sawtooth(-50, 150, w));
-    _spirals[0].show();
+    _spirals[0].show(_backgroundType);
 
     _spirals[1].setHeightRangePercent(sawtooth(-50, 150, w, wo * 2),
                                       sawtooth(-50, 150, w, wo));
-    _spirals[1].show();
+    _spirals[1].show(_backgroundType);
 
     _spirals[2].setHeightRangePercent(sawtooth(-50, 150, w, w),
                                       sawtooth(-50, 150, w, wo * 2));
-    _spirals[2].show();
+    _spirals[2].show(_backgroundType);
   }
 
   void _showBasicSpiralRotation() {
-    _spirals[0].show();
-    _spirals[1].show();
+    _spirals[0].show(_backgroundType);
+    _spirals[1].show(_backgroundType);
   }
 
   void _showContinuousSpiral() {
@@ -83,18 +84,10 @@ class SpiralSubPattern : public SubPattern {
       _spirals[0].setSpeed(speed);
       _spirals[0].setRadiusRangePercent(minRadiusPercent, maxRadiusPercent);
     }
-    _spirals[0].show();
+    _spirals[0].show(_backgroundType);
   }
 
   void _showCornerChase(bool reverse) {
-    // Set background
-    for (uint8_t d = 0; d < NUM_DISCS; d++) {
-      for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
-        CRGB color = palette.getColor(d).nscale8(BACKGROUND_BRIGHTNESS *
-                                                 getPercentBrightness() / 100);
-        discs[d].setBlend(p, color, BACKGROUND_BRIGHTNESS);
-      }
-    }
     unsigned long w = 100;  // waveLength
     unsigned long wo = 33;  // waveLengthOffset
     float min, max;
@@ -106,13 +99,13 @@ class SpiralSubPattern : public SubPattern {
       max = sawtooth(-50, 150, w);
     }
     _spirals[0].setHeightRangePercent(min, max);
-    _spirals[0].showOverBackground();
+    _spirals[0].show(_backgroundType);
     _spirals[1].setHeightRangePercent(min, max);
-    _spirals[1].showOverBackground();
+    _spirals[1].show(_backgroundType);
     _spirals[2].setHeightRangePercent(min, max);
-    _spirals[2].showOverBackground();
+    _spirals[2].show(_backgroundType);
     _spirals[3].setHeightRangePercent(min, max);
-    _spirals[3].showOverBackground();
+    _spirals[3].show(_backgroundType);
   }
 
  public:
@@ -125,8 +118,10 @@ class SpiralSubPattern : public SubPattern {
   static const uint8_t CORNER_CHASE = 6;
   static const uint8_t CORNER_CHASE_REVERSE = 7;
 
-  SpiralSubPattern(uint8_t activeSubPattern = 0) {
+  SpiralSubPattern(uint8_t activeSubPattern = 0,
+                   uint8_t backgroundType = COLOR_ON_BLACK) {
     _activeSubPattern = activeSubPattern;
+    _backgroundType = backgroundType;
     switch (_activeSubPattern) {
       case RUBBER_BAND_WORM:
         _numSpirals = 1;
@@ -206,6 +201,16 @@ class SpiralSubPattern : public SubPattern {
   }
 
   virtual void show() {
+    if (_backgroundType == WHITE_ON_COLOR || _backgroundType == BRIGHT_ON_COLOR) {
+      // Set background
+      for (uint8_t d = 0; d < NUM_DISCS; d++) {
+        for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
+          CRGB color = palette.getColor(d).nscale8(BACKGROUND_BRIGHTNESS *
+                                                   getPercentBrightness() / 100);
+          discs[d].setBlend(p, color, BACKGROUND_BRIGHTNESS);
+        }
+      }
+    }
     switch (_activeSubPattern) {
       case RUBBER_BAND_WORM:
         _showRubberBandWorm();

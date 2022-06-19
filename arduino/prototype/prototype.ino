@@ -42,8 +42,8 @@ SpiralSubPattern rubberBandAnchored(SpiralSubPattern::RUBBER_BAND_ANCHORED);
 SpiralSubPattern growingSpirals(SpiralSubPattern::GROWING_SPIRALS);
 SpiralSubPattern basicSpiralRotation(SpiralSubPattern::BASIC_SPIRAL_ROTATION);
 SpiralSubPattern continuousSpiral(SpiralSubPattern::CONTINUOUS_SPIRAL);
-SpiralSubPattern cornerChase(SpiralSubPattern::CORNER_CHASE);
-SpiralSubPattern cornerChaseReverse(SpiralSubPattern::CORNER_CHASE_REVERSE);
+SpiralSubPattern cornerChase(SpiralSubPattern::CORNER_CHASE, WHITE_ON_COLOR);
+SpiralSubPattern cornerChaseReverse(SpiralSubPattern::CORNER_CHASE_REVERSE, WHITE_ON_COLOR);
 
 // clang-format off
 SubPattern *activePatterns[] = {
