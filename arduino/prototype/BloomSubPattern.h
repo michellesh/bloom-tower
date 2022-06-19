@@ -14,6 +14,8 @@ class BloomSubPattern : public SubPattern {
   static const uint8_t END_SAME = 2;
   static const uint8_t UPWARD = 3;
   static const uint8_t DOWNWARD = 4;
+  static const uint8_t EXPLODE_IN = 5;
+  static const uint8_t EXPLODE_OUT = 6;
 
   BloomSubPattern(uint8_t activeSubPattern = 0,
                   uint8_t backgroundType = COLOR_ON_BLACK) {
@@ -21,6 +23,7 @@ class BloomSubPattern : public SubPattern {
     _backgroundType = backgroundType;
     int16_t discOffset = 0;
     bool continuous = false;
+    int16_t speed = Bloom::SPEED.DFLT;
 
     switch (_activeSubPattern) {
       case CONTINUOUS:
@@ -36,6 +39,15 @@ class BloomSubPattern : public SubPattern {
       case DOWNWARD:
         discOffset = -40;
         break;
+      case EXPLODE_IN:
+        _numBlooms = 1;
+        discOffset = -20;
+        break;
+      case EXPLODE_OUT:
+        _numBlooms = 1;
+        discOffset = -20;
+        speed = -speed;
+        break;
       default:
         break;
     }
@@ -43,10 +55,12 @@ class BloomSubPattern : public SubPattern {
     if (_numBlooms > 0) {
       _blooms[0] = Bloom();
       _blooms[0].setRipples(discOffset, continuous);
+      _blooms[0].setSpeed(speed);
     }
     if (_numBlooms > 1) {
       _blooms[1] = Bloom(1, Bloom::OFFSET.MAX / 2 + Bloom::WIDTH.DFLT / 2);
       _blooms[1].setRipples(discOffset, continuous);
+      _blooms[0].setSpeed(speed);
     }
   }
 

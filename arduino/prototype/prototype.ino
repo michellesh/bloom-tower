@@ -35,6 +35,8 @@ BloomSubPattern bloomStartSame(BloomSubPattern::START_SAME);
 BloomSubPattern bloomEndSame(BloomSubPattern::END_SAME);
 BloomSubPattern bloomUpward(BloomSubPattern::UPWARD);
 BloomSubPattern bloomDownward(BloomSubPattern::DOWNWARD);
+BloomSubPattern bloomExplodeIn(BloomSubPattern::EXPLODE_IN);
+BloomSubPattern bloomExplodeOut(BloomSubPattern::EXPLODE_OUT);
 
 SpiralSubPattern rubberBandWorm(SpiralSubPattern::RUBBER_BAND_WORM);
 SpiralSubPattern rubberBandNoAnchor(SpiralSubPattern::RUBBER_BAND_NO_ANCHOR);
