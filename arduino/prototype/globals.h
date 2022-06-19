@@ -23,9 +23,9 @@
 // Incremented once per iteration of the loop
 unsigned long ticks = 0;
 
-// TODO change these numbers to the real ones
-// should be ordered top/smallest level -> bottom/largest level
-int16_t NUM_LEDS[] = {176, 352, 528, 704, 1056, 1408, 1756};
+// LED counts per side per level: 44, 97, 136, 175, 263, 351, 432
+// Ordered top/smallest level -> bottom/largest level
+int16_t NUM_LEDS[] = {176, 388, 544, 700, 1052, 1404, 1728};
 int16_t NUM_LEDS_TOTAL = NUM_LEDS[0] + NUM_LEDS[1] + NUM_LEDS[2] + NUM_LEDS[3] +
                          NUM_LEDS[4] + NUM_LEDS[5] + NUM_LEDS[6];
 
