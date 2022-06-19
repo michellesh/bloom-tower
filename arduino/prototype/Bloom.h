@@ -46,11 +46,44 @@ class Ripple {
     }
   }
 
-  void show(int16_t width, uint8_t percentBrightness) {
+  void show(uint8_t backgroundType, int16_t width, uint8_t percentBrightness) {
+    if (backgroundType == COLOR_ON_BLACK) {
+      showColor(width, percentBrightness);
+    } else if (backgroundType == WHITE_ON_COLOR) {
+      showWhite(width, percentBrightness);
+    } else {
+      showBright(width, percentBrightness);
+    }
+  }
+
+  void showColor(int16_t width, uint8_t percentBrightness) {
     for (uint16_t p = 0; p < discs[_discIndex].numLEDs; p++) {
       uint8_t brightness = _getBrightness(p, width);
       if (brightness > 0) {
         CRGB color = palette.getColor(_colorIndex)
+                         .nscale8(brightness * percentBrightness / 100);
+        discs[_discIndex].setBrighter(p, color, brightness);
+      }
+    }
+  }
+
+  void showWhite(int16_t width, uint8_t percentBrightness) {
+    CRGB white = CRGB::White;
+    for (uint16_t p = 0; p < discs[_discIndex].numLEDs; p++) {
+      uint8_t brightness = _getBrightness(p, width);
+      if (brightness > 0) {
+        brightness = map(brightness, 0, 255, BACKGROUND_BRIGHTNESS, 255);
+        CRGB color = white.nscale8(brightness * percentBrightness / 100);
+        discs[_discIndex].setBrighter(p, color, brightness);
+      }
+    }
+  }
+
+  void showBright(int16_t width, uint8_t percentBrightness) {
+    for (uint16_t p = 0; p < discs[_discIndex].numLEDs; p++) {
+      uint8_t brightness = _getBrightness(p, width);
+      if (brightness > BACKGROUND_BRIGHTNESS) {
+        CRGB color = palette.getColor(_discIndex)
                          .nscale8(brightness * percentBrightness / 100);
         discs[_discIndex].setBrighter(p, color, brightness);
       }
@@ -95,9 +128,9 @@ class Bloom : public Pattern {
 
   void reverse() { _speed = _speed * -1; }
 
-  void show() {
+  void show(uint8_t backgroundType) {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
-      _ripples[d].show(_width, getPercentBrightness());
+      _ripples[d].show(backgroundType, _width, getPercentBrightness());
       _ripples[d].updateRadius(_speed, _width, _colorInc);
     }
   }

@@ -6,6 +6,7 @@ class BloomSubPattern : public SubPattern {
   uint8_t _numBlooms = MAX_BLOOMS;
   uint8_t _activeSubPattern = 0;
   uint8_t _percentBrightness = 0;  // percent brightness of the whole pattern
+  uint8_t _backgroundType = COLOR_ON_BLACK;
 
  public:
   static const uint8_t CONTINUOUS = 0;
@@ -14,8 +15,10 @@ class BloomSubPattern : public SubPattern {
   static const uint8_t UPWARD = 3;
   static const uint8_t DOWNWARD = 4;
 
-  BloomSubPattern(uint8_t activeSubPattern = 0) {
+  BloomSubPattern(uint8_t activeSubPattern = 0,
+                  uint8_t backgroundType = COLOR_ON_BLACK) {
     _activeSubPattern = activeSubPattern;
+    _backgroundType = backgroundType;
     int16_t discOffset = 0;
     bool continuous = false;
 
@@ -58,7 +61,7 @@ class BloomSubPattern : public SubPattern {
 
   virtual void show() {
     for (uint8_t i = 0; i < _numBlooms; i++) {
-      _blooms[i].show();
+      _blooms[i].show(_backgroundType);
     }
   }
 };
