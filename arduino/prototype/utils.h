@@ -65,3 +65,5 @@ CRGB getColorBetween(CRGB color1, CRGB color2, float percent = 0.5) {
               color1.g + percent * (color2.g - color1.g),
               color1.b + percent * (color2.b - color1.b));
 }
+
+unsigned long seconds(unsigned long numSeconds) { return numSeconds * 1000; }

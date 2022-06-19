@@ -7,6 +7,8 @@ class BloomSubPattern : public SubPattern {
   uint8_t _activeSubPattern = 0;
   uint8_t _percentBrightness = 0;  // percent brightness of the whole pattern
   uint8_t _backgroundType = COLOR_ON_BLACK;
+  uint8_t _numSeconds =
+      NUM_SECONDS_DEFAULT;  // number of seconds to run this pattern
 
  public:
   static const uint8_t CONTINUOUS = 0;
@@ -63,6 +65,8 @@ class BloomSubPattern : public SubPattern {
       _blooms[0].setSpeed(speed);
     }
   }
+
+  virtual uint8_t getNumSeconds() { return _numSeconds; }
 
   virtual uint8_t getPercentBrightness() { return _percentBrightness; }
 

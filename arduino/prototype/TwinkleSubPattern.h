@@ -3,6 +3,8 @@ class TwinkleSubPattern : public SubPattern {
   Twinkle _twinkle;
   uint8_t _activeSubPattern = 0;
   uint8_t _percentBrightness = 0;  // percent brightness of the whole pattern
+  uint8_t _numSeconds =
+      NUM_SECONDS_DEFAULT;  // number of seconds to run this pattern
 
   void _showCorners() {
     _twinkle.show();
@@ -31,6 +33,8 @@ class TwinkleSubPattern : public SubPattern {
   TwinkleSubPattern(uint8_t activeSubPattern = 0) {
     _activeSubPattern = activeSubPattern;
   }
+
+  virtual uint8_t getNumSeconds() { return _numSeconds; }
 
   virtual uint8_t getPercentBrightness() { return _percentBrightness; }
 

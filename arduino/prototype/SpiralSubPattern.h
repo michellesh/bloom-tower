@@ -7,6 +7,8 @@ class SpiralSubPattern : public SubPattern {
   uint8_t _activeSubPattern = 0;
   uint8_t _percentBrightness = 0;  // percent brightness of the whole pattern
   uint8_t _backgroundType = COLOR_ON_BLACK;
+  uint8_t _numSeconds =
+      NUM_SECONDS_DEFAULT;  // number of seconds to run this pattern
 
   void _showRubberBandWorm() {
     int16_t offset = sinwave(-90, 90, 100);
@@ -191,6 +193,8 @@ class SpiralSubPattern : public SubPattern {
     }
   }
 
+  virtual uint8_t getNumSeconds() { return _numSeconds; }
+
   virtual uint8_t getPercentBrightness() { return _percentBrightness; }
 
   virtual void setPercentBrightness(uint8_t percentBrightness) {
@@ -201,12 +205,13 @@ class SpiralSubPattern : public SubPattern {
   }
 
   virtual void show() {
-    if (_backgroundType == WHITE_ON_COLOR || _backgroundType == BRIGHT_ON_COLOR) {
+    if (_backgroundType == WHITE_ON_COLOR ||
+        _backgroundType == BRIGHT_ON_COLOR) {
       // Set background
       for (uint8_t d = 0; d < NUM_DISCS; d++) {
         for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
-          CRGB color = palette.getColor(d).nscale8(BACKGROUND_BRIGHTNESS *
-                                                   getPercentBrightness() / 100);
+          CRGB color = palette.getColor(d).nscale8(
+              BACKGROUND_BRIGHTNESS * getPercentBrightness() / 100);
           discs[d].setBlend(p, color, BACKGROUND_BRIGHTNESS);
         }
       }

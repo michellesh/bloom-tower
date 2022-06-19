@@ -16,6 +16,7 @@ uint8_t *ledBrightness;
 Palette palette;
 
 #include "Range.h"
+#include "Timer.h"
 #include "Pattern.h"
 #include "Bloom.h"
 #include "Spiral.h"
@@ -25,6 +26,10 @@ Palette palette;
 #include "BloomSubPattern.h"
 #include "SpiralSubPattern.h"
 #include "TwinkleSubPattern.h"
+#include "StaticSubPattern.h"
+
+StaticSubPattern staticBlack(StaticSubPattern::BLACK);
+StaticSubPattern staticColor(StaticSubPattern::COLOR);
 
 TwinkleSubPattern twinkle(TwinkleSubPattern::ORIGINAL);
 TwinkleSubPattern twinkleExpandedPixel(TwinkleSubPattern::EXPANDED_PIXEL);
@@ -45,7 +50,10 @@ SpiralSubPattern growingSpirals(SpiralSubPattern::GROWING_SPIRALS);
 SpiralSubPattern basicSpiralRotation(SpiralSubPattern::BASIC_SPIRAL_ROTATION);
 SpiralSubPattern continuousSpiral(SpiralSubPattern::CONTINUOUS_SPIRAL);
 SpiralSubPattern cornerChase(SpiralSubPattern::CORNER_CHASE, WHITE_ON_COLOR);
-SpiralSubPattern cornerChaseReverse(SpiralSubPattern::CORNER_CHASE_REVERSE, WHITE_ON_COLOR);
+SpiralSubPattern cornerChaseReverse(SpiralSubPattern::CORNER_CHASE_REVERSE,
+                                    WHITE_ON_COLOR);
+
+Timer patternTimer = {seconds(NUM_SECONDS_DEFAULT), 0};
 
 // clang-format off
 SubPattern *activePatterns[] = {
@@ -140,18 +148,23 @@ void setup() {
   sourcePattern->setPercentBrightness(0);
   targetPattern = (SubPattern *)activePatterns[0];
   targetPattern->setPercentBrightness(100);
+  patternTimer.totalCycleTime = seconds(targetPattern->getNumSeconds());
 }
 
 void loop() {
   clearLEDs();
   palette.cycle();
 
-  EVERY_N_SECONDS(15) {
+  if (patternTimer.complete()) {
     // Increment active pattern
     sourcePattern = (SubPattern *)targetPattern;
     static uint8_t nextPattern = 0;
     nextPattern = (nextPattern + 1) % numPatterns;
     targetPattern = (SubPattern *)(activePatterns[nextPattern]);
+
+    // Reset the timer to how long new targetPattern runs for
+    patternTimer.totalCycleTime = seconds(targetPattern->getNumSeconds());
+    patternTimer.reset();
   }
 
   EVERY_N_MILLISECONDS(100) {
