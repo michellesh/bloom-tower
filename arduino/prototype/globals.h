@@ -20,7 +20,7 @@
 #define WHITE_ON_COLOR 2
 #define BRIGHT_ON_COLOR 3
 
-#define NUM_SECONDS_DEFAULT 15
+#define NUM_SECONDS_DEFAULT 10
 #define NUM_SECONDS_TRANSITION 3
 
 // Incremented once per iteration of the loop

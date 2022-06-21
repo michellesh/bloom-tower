@@ -69,17 +69,17 @@ SubPattern *activePatterns[] = {
 
   // Same from OG Bloom
   &twinkle, // set with lower density than OG Bloom
-  //&bloomContinuous,
-  //&bloomStartSame,
-  //&bloomEndSame,
-  //&bloomUpward,
-  //&bloomDownward,
-  //&rubberBandWorm,
-  //&rubberBandNoAnchor,
-  //&rubberBandAnchored,
-  //&growingSpirals,
-  //&basicSpiralRotation,
-  //&continuousSpiral
+  &bloomContinuous,
+  &bloomStartSame,
+  &bloomEndSame,
+  &bloomUpward,
+  &bloomDownward,
+  &rubberBandWorm,
+  &rubberBandNoAnchor,
+  &rubberBandAnchored,
+  &growingSpirals,
+  &basicSpiralRotation,
+  &continuousSpiral
 };
 // clang-format on
 
