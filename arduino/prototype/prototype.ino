@@ -160,6 +160,8 @@ void setup() {
 }
 
 void loop() {
+  staticChakra.show();
+  /*
   clearLEDs();
   palette.cycle();
 
@@ -185,6 +187,7 @@ void loop() {
       activePatterns[i]->show();
     }
   }
+  */
 
   // demoColorModes();
 

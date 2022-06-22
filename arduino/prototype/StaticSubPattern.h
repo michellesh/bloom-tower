@@ -74,6 +74,7 @@ class StaticSubPattern : public SubPattern {
   }
 
   virtual void show() {
+    /*
     if (_backgroundType == WHITE_ON_COLOR ||
         _backgroundType == BRIGHT_ON_COLOR) {
       // Set background
@@ -85,6 +86,7 @@ class StaticSubPattern : public SubPattern {
         }
       }
     }
+    */
     switch (_activeSubPattern) {
       case CHAKRA:
         _showChakra();
