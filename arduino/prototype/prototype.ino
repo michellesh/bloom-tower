@@ -59,6 +59,30 @@ SpiralSubPattern cornerChaseReverse(SpiralSubPattern::CORNER_CHASE_REVERSE,
 
 Timer patternTimer = {seconds(NUM_SECONDS_DEFAULT), 0};
 
+/*
+ * Choreography:
+ *  7 chakras static - 3 min
+ * pattern 1 - 3 minutes, 7 chakras colors
+ *  7 chakras static - 3 min
+ * pattern 2 - 3 minutes, color palette A
+ *
+ * When moving from static 7 chakras to a pattern, fade to black and then to the pattern.
+ * When moving from a pattern to static 7 chakras, fade directly to 7 chakras with no black.
+
+SubPattern *activePatterns[] = {
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+
+  &twinkle,  // 3 min
+
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+
+  &cornerChase, // 3 min - color palette A
+};
+ */
+
+
 // clang-format off
 SubPattern *activePatterns[] = {
   // Added for Bloom Tower

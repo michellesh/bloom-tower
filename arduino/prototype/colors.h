@@ -37,12 +37,26 @@ DEFINE_GRADIENT_PALETTE(_fairyPalette){0,   63,  57,  11,    // "QuarterFairy"
                                        255, 255, 255, 255};  // full white
 CRGBPalette16 fairyPalette = _fairyPalette;
 
+DEFINE_GRADIENT_PALETTE(_chakraPalette){0,   128, 0,   128,  // CRGB::Purple
+                                        42,  0,   0,   255,  // CRGB::Blue
+                                        84,  0,   255, 255,  // CRGB::Cyan
+                                        126, 0,   128, 0,    // CRGB::Green
+                                        168, 255, 255, 0,    // CRGB::Yellow
+                                        210, 255, 165, 0,    // CRGB::Orange
+                                        255, 255, 0,   0};   // CRGB::Red
+CRGBPalette16 chakraPalette = _chakraPalette;
+
 // clang-format off
 CRGBPalette16* activePalettes[] = {
+  &chakraPalette,
   &redRoseLavendar,
+  &chakraPalette,
   &tealGreenGold,
+  &chakraPalette,
   //&firePalette,
   &icePalette,
-  &fairyPalette
+  &chakraPalette,
+  &fairyPalette,
+  &chakraPalette
 };
 // clang-format on

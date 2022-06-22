@@ -4,7 +4,7 @@ class StaticSubPattern : public SubPattern {
   uint8_t _percentBrightness = 0;  // percent brightness of the whole pattern
   uint8_t _backgroundType = COLOR_ON_BLACK;
   uint8_t _numSeconds =
-      NUM_SECONDS_TRANSITION;  // number of seconds to run this pattern
+      NUM_SECONDS_DEFAULT;  // number of seconds to run this pattern
 
   void _showBlack() {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
@@ -17,7 +17,8 @@ class StaticSubPattern : public SubPattern {
   void _showChakra() {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
       for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
-        discs[d].leds[p] = chakra[d];
+        //discs[d].leds[p] = chakra[d];
+        discs[d].setBlend(p, chakra[d], BRIGHTNESS);
       }
     }
   }
@@ -95,12 +96,11 @@ class StaticSubPattern : public SubPattern {
         _showColor();
         break;
       case LINES:
-        _numSeconds = NUM_SECONDS_DEFAULT;
         _showLines();
       case TRIANGLE:
-        _numSeconds = NUM_SECONDS_DEFAULT;
         //_showTriangle();
       default:
+        _numSeconds = SEC_10;
         _showBlack();
         break;
     }

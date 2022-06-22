@@ -4,8 +4,9 @@ class Palette {
  private:
   CRGBPalette16 _currentPalette = *(activePalettes[0]);
   CRGBPalette16 _targetPalette = *(activePalettes[0]);
-  uint8_t _activeColorMode = CHAKRA;
-  uint8_t _secondsPerPalette = 10;
+  uint8_t _activeColorMode = VERTICAL_GRADIENT;
+  uint8_t _secondsPerPalette =
+      NUM_SECONDS_DEFAULT + NUM_SECONDS_DEFAULT + SEC_10;
 
   void _setNextColorPalette() {
     const uint8_t numberOfPalettes =
