@@ -35,9 +35,9 @@ const Prototype = () => {
       window.cancelAnimationFrame(window.reqId);
     }
     if (context) {
-      //animations.ripple(context, LEVELS);
+      animations.lines(context, LEVELS);
 
-      animations.showLEDs(context, LEVELS);
+      //animations.showLEDs(context, LEVELS);
 
       // Output each angle value as text to verify they are correct
       //context.fillStyle = 'white';

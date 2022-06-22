@@ -9,3 +9,4 @@ export const showLEDs = (context, levels) => {
 };
 
 export * from './ripple';
+export * from './lines';
