@@ -30,6 +30,7 @@ Palette palette;
 
 StaticSubPattern staticBlack(StaticSubPattern::BLACK);
 StaticSubPattern staticColor(StaticSubPattern::COLOR);
+StaticSubPattern staticChakra(StaticSubPattern::CHAKRA);
 StaticSubPattern staticLines(StaticSubPattern::LINES);
 StaticSubPattern staticLinesWhite(StaticSubPattern::LINES, WHITE_ON_COLOR);
 StaticSubPattern staticLinesColor(StaticSubPattern::LINES, BRIGHT_ON_COLOR);
@@ -61,29 +62,30 @@ Timer patternTimer = {seconds(NUM_SECONDS_DEFAULT), 0};
 // clang-format off
 SubPattern *activePatterns[] = {
   // Added for Bloom Tower
-  &staticBlack, // solid black. for transitions
-  &staticColor, // solid color. for transitions
-  &staticLines, // static diagonal lines?
-  &staticLinesWhite, // static diagonal lines, WHITE_ON_COLOR
-  &staticLinesColor, // static diagonal lines, BRIGHT_ON_COLOR
-  &twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
-  &twinkleCorners, // twinkle in corner 5%, everywhere else is a background color
-  &cornerChase, // light up corner (5%) and shoot upwards
-  &cornerChaseReverse, // light up corner (5%) and shoot downwards
+  &staticChakra, // solid color. for transitions
+  //&staticBlack, // solid black. for transitions
+  //&staticColor, // solid color. for transitions
+  //&staticLines, // static diagonal lines?
+  //&staticLinesWhite, // static diagonal lines, WHITE_ON_COLOR
+  //&staticLinesColor, // static diagonal lines, BRIGHT_ON_COLOR
+  //&twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
+  //&twinkleCorners, // twinkle in corner 5%, everywhere else is a background color
+  //&cornerChase, // light up corner (5%) and shoot upwards
+  //&cornerChaseReverse, // light up corner (5%) and shoot downwards
 
   // Same from OG Bloom
-  &twinkle, // set with lower density than OG Bloom
-  &bloomContinuous,
-  &bloomStartSame,
-  &bloomEndSame,
-  &bloomUpward,
-  &bloomDownward,
-  &rubberBandWorm,
-  &rubberBandNoAnchor,
-  &rubberBandAnchored,
-  &growingSpirals,
-  &basicSpiralRotation,
-  &continuousSpiral
+  //&twinkle, // set with lower density than OG Bloom
+  //&bloomContinuous,
+  //&bloomStartSame,
+  //&bloomEndSame,
+  //&bloomUpward,
+  //&bloomDownward,
+  //&rubberBandWorm,
+  //&rubberBandNoAnchor,
+  //&rubberBandAnchored,
+  //&growingSpirals,
+  //&basicSpiralRotation,
+  //&continuousSpiral
 };
 // clang-format on
 
@@ -148,8 +150,6 @@ void setup() {
   for (int16_t i = 0; i < NUM_LEDS_TOTAL; i++) {
     leds[i] = CRGB::Red;
   }
-
-  FastLED.setBrightness(100);
 
   // Set first pattern in activePatterns to be played first
   sourcePattern = (SubPattern *)activePatterns[numPatterns - 1];

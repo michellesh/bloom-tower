@@ -14,6 +14,14 @@ class StaticSubPattern : public SubPattern {
     }
   }
 
+  void _showChakra() {
+    for (uint8_t d = 0; d < NUM_DISCS; d++) {
+      for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
+        discs[d].setBlend(p, chakra[d], BRIGHTNESS);
+      }
+    }
+  }
+
   void _showColor() {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
       for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
@@ -49,6 +57,7 @@ class StaticSubPattern : public SubPattern {
   static const uint8_t COLOR = 1;
   static const uint8_t LINES = 2;
   static const uint8_t TRIANGLE = 3;
+  static const uint8_t CHAKRA = 4;
 
   StaticSubPattern(uint8_t activeSubPattern = 0,
                    uint8_t backgroundType = COLOR_ON_BLACK) {
@@ -77,6 +86,9 @@ class StaticSubPattern : public SubPattern {
       }
     }
     switch (_activeSubPattern) {
+      case CHAKRA:
+        _showChakra();
+        break;
       case COLOR:
         _showColor();
         break;
