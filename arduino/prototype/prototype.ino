@@ -34,6 +34,7 @@ StaticSubPattern staticChakra(StaticSubPattern::CHAKRA);
 StaticSubPattern staticLines(StaticSubPattern::LINES);
 StaticSubPattern staticLinesWhite(StaticSubPattern::LINES, WHITE_ON_COLOR);
 StaticSubPattern staticLinesColor(StaticSubPattern::LINES, BRIGHT_ON_COLOR);
+StaticSubPattern movingLines(StaticSubPattern::LINES_MOVING);
 
 TwinkleSubPattern twinkle(TwinkleSubPattern::ORIGINAL);
 TwinkleSubPattern twinkleExpandedPixel(TwinkleSubPattern::EXPANDED_PIXEL);
@@ -66,8 +67,10 @@ Timer patternTimer = {seconds(NUM_SECONDS_DEFAULT), 0};
  *  7 chakras static - 3 min
  * pattern 2 - 3 minutes, color palette A
  *
- * When moving from static 7 chakras to a pattern, fade to black and then to the pattern.
- * When moving from a pattern to static 7 chakras, fade directly to 7 chakras with no black.
+ * When moving from static 7 chakras to a pattern, fade to black and then to the
+pattern.
+ * When moving from a pattern to static 7 chakras, fade directly to 7 chakras
+with no black.
 
 SubPattern *activePatterns[] = {
   &staticChakra, // 3 min
@@ -82,7 +85,6 @@ SubPattern *activePatterns[] = {
 };
  */
 
-
 // clang-format off
 SubPattern *activePatterns[] = {
   // Added for Bloom Tower
@@ -90,6 +92,7 @@ SubPattern *activePatterns[] = {
   //&staticBlack, // solid black. for transitions
   //&staticColor, // solid color. for transitions
   //&staticLines, // static diagonal lines?
+  //&movingLines, // diagonal lines moving across
   //&staticLinesWhite, // static diagonal lines, WHITE_ON_COLOR
   //&staticLinesColor, // static diagonal lines, BRIGHT_ON_COLOR
   //&twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments

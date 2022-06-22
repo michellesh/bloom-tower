@@ -5,6 +5,7 @@ class StaticSubPattern : public SubPattern {
   uint8_t _backgroundType = COLOR_ON_BLACK;
   uint8_t _numSeconds =
       NUM_SECONDS_DEFAULT;  // number of seconds to run this pattern
+  uint8_t _offsets[NUM_DISCS] = {0, 0, 0, 0, 0, 0, 0};
 
   void _showBlack() {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
@@ -17,7 +18,7 @@ class StaticSubPattern : public SubPattern {
   void _showChakra() {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
       for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
-        //discs[d].leds[p] = chakra[d];
+        // discs[d].leds[p] = chakra[d];
         discs[d].setBlend(p, chakra[d], BRIGHTNESS);
       }
     }
@@ -33,21 +34,32 @@ class StaticSubPattern : public SubPattern {
     }
   }
 
-  void _showLines() {
+  void _showLines(bool moving = false) {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
-      for (uint16_t p = 0; p < discs[d].numLEDs; p += SEGMENT_LENGTH) {
-        if (_backgroundType == COLOR_ON_BLACK) {
-          CRGB color = palette.getColor(d, p).nscale8(BRIGHTNESS *
-                                                      _percentBrightness / 100);
-          discs[d].setBlend(p, color, BRIGHTNESS);
-        } else if (_backgroundType == WHITE_ON_COLOR) {
-          CRGB white = CRGB::White;
-          CRGB color = white.nscale8(BRIGHTNESS * getPercentBrightness() / 100);
-          discs[d].setBlend(p, color, BRIGHTNESS);
+      for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
+        if ((p + _offsets[d]) % SEGMENT_LENGTH == 0) {
+          if (_backgroundType == COLOR_ON_BLACK) {
+            CRGB color = palette.getColor(d, p).nscale8(
+                BRIGHTNESS * _percentBrightness / 100);
+            discs[d].setBlend(p, color, BRIGHTNESS);
+          } else if (_backgroundType == WHITE_ON_COLOR) {
+            CRGB white = CRGB::White;
+            CRGB color =
+                white.nscale8(BRIGHTNESS * getPercentBrightness() / 100);
+            discs[d].setBlend(p, color, BRIGHTNESS);
+          } else {
+            CRGB color = palette.getColor(d).nscale8(
+                BRIGHTNESS * getPercentBrightness() / 100);
+            discs[d].setBlend(p, color, BRIGHTNESS);
+          }
         } else {
-          CRGB color = palette.getColor(d).nscale8(
-              BRIGHTNESS * getPercentBrightness() / 100);
-          discs[d].setBlend(p, color, BRIGHTNESS);
+          discs[d].setBlend(p, CRGB::Black, 0);
+        }
+      }
+      if (moving) {
+        _offsets[d]++;
+        if (_offsets[d] > discs[d].numLEDs) {
+          _offsets[d] = 0;
         }
       }
     }
@@ -59,6 +71,7 @@ class StaticSubPattern : public SubPattern {
   static const uint8_t LINES = 2;
   static const uint8_t TRIANGLE = 3;
   static const uint8_t CHAKRA = 4;
+  static const uint8_t LINES_MOVING = 5;
 
   StaticSubPattern(uint8_t activeSubPattern = 0,
                    uint8_t backgroundType = COLOR_ON_BLACK) {
@@ -96,7 +109,9 @@ class StaticSubPattern : public SubPattern {
         _showColor();
         break;
       case LINES:
-        _showLines();
+        _showLines(false);
+      case LINES_MOVING:
+        _showLines(true);
       case TRIANGLE:
         //_showTriangle();
       default:
