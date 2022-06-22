@@ -17,7 +17,7 @@ class StaticSubPattern : public SubPattern {
   void _showChakra() {
     for (uint8_t d = 0; d < NUM_DISCS; d++) {
       for (uint16_t p = 0; p < discs[d].numLEDs; p++) {
-        discs[d].setBlend(p, chakra[d], BRIGHTNESS);
+        discs[d].leds[p] = chakra[d];
       }
     }
   }
