@@ -71,21 +71,73 @@ Timer patternTimer = {seconds(NUM_SECONDS_DEFAULT), 0};
 pattern.
  * When moving from a pattern to static 7 chakras, fade directly to 7 chakras
 with no black.
+  */
 
+// clang-format off
+
+// OFFICIAL CHOREOGRAPHY
 SubPattern *activePatterns[] = {
   &staticChakra, // 3 min
   &staticBlack, // 10 sec
 
-  &twinkle,  // 3 min
+  &twinkle,  // 3 min - chakra colors
 
   &staticChakra, // 3 min
   &staticBlack, // 10 sec
 
   &cornerChase, // 3 min - color palette A
-};
- */
 
-// clang-format off
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+
+  &bloomContinuous, // 3 min - chakra colors
+
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+
+  &bloomStartSame, // 3 min - color palette B
+
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+
+  &bloomEndSame, // 3 min - chakra colors
+
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+
+  &bloomUpward, // 3 min - color palette C
+
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+
+  &bloomDownward, // 3 min - chakra colors
+
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+
+  &movingLines, // 3 min - color palette D
+
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+};
+
+// Tests the above choreography. Also change NUM_SECONDS_DEFAULT
+/*
+SubPattern *activePatterns[] = {
+  &staticChakra, // 3 min
+  &staticBlack, // 10 sec
+  &twinkle,  // 3 min - chakra colors
+  &cornerChase, // 3 min - color palette A
+  &bloomContinuous, // 3 min - chakra colors
+  &bloomStartSame, // 3 min - color palette B
+  &bloomEndSame, // 3 min - chakra colors
+  &bloomUpward, // 3 min - color palette C
+  &bloomDownward, // 3 min - chakra colors
+  &movingLines, // 3 min - color palette D
+};
+*/
+
+/*
 SubPattern *activePatterns[] = {
   // Added for Bloom Tower
   &staticChakra, // solid color. for transitions
@@ -95,8 +147,10 @@ SubPattern *activePatterns[] = {
   //&movingLines, // diagonal lines moving across
   //&staticLinesWhite, // static diagonal lines, WHITE_ON_COLOR
   //&staticLinesColor, // static diagonal lines, BRIGHT_ON_COLOR
-  //&twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
-  //&twinkleCorners, // twinkle in corner 5%, everywhere else is a background color
+  //&twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft
+segments
+  //&twinkleCorners, // twinkle in corner 5%, everywhere else is a background
+color
   //&cornerChase, // light up corner (5%) and shoot upwards
   //&cornerChaseReverse, // light up corner (5%) and shoot downwards
 
@@ -114,6 +168,8 @@ SubPattern *activePatterns[] = {
   //&basicSpiralRotation,
   //&continuousSpiral
 };
+*/
+
 // clang-format on
 
 SubPattern *sourcePattern;

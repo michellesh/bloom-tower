@@ -53,10 +53,8 @@ CRGBPalette16* activePalettes[] = {
   &chakraPalette,
   &tealGreenGold,
   &chakraPalette,
-  //&firePalette,
   &icePalette,
   &chakraPalette,
-  &fairyPalette,
-  &chakraPalette
+  &fairyPalette
 };
 // clang-format on
