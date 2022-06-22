@@ -31,6 +31,8 @@ Palette palette;
 StaticSubPattern staticBlack(StaticSubPattern::BLACK);
 StaticSubPattern staticColor(StaticSubPattern::COLOR);
 StaticSubPattern staticLines(StaticSubPattern::LINES);
+StaticSubPattern staticLinesWhite(StaticSubPattern::LINES, WHITE_ON_COLOR);
+StaticSubPattern staticLinesColor(StaticSubPattern::LINES, BRIGHT_ON_COLOR);
 
 TwinkleSubPattern twinkle(TwinkleSubPattern::ORIGINAL);
 TwinkleSubPattern twinkleExpandedPixel(TwinkleSubPattern::EXPANDED_PIXEL);
@@ -59,13 +61,15 @@ Timer patternTimer = {seconds(NUM_SECONDS_DEFAULT), 0};
 // clang-format off
 SubPattern *activePatterns[] = {
   // Added for Bloom Tower
-  //&twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
-  //&twinkleCorners, // twinkle in corner 5%, everywhere else is a background color
-  //&cornerChase, // light up corner (5%) and shoot upwards
-  //&cornerChaseReverse, // light up corner (5%) and shoot downwards
-  //&staticBlack, // solid black. for transitions
-  //&staticColor, // solid color. for transitions
-  //&staticLines, // static diagonal lines?
+  &staticBlack, // solid black. for transitions
+  &staticColor, // solid color. for transitions
+  &staticLines, // static diagonal lines?
+  &staticLinesWhite, // static diagonal lines, WHITE_ON_COLOR
+  &staticLinesColor, // static diagonal lines, BRIGHT_ON_COLOR
+  &twinkleExpandedPixel, // same as twinkle but expand a 'pixel' to be 1 ft segments
+  &twinkleCorners, // twinkle in corner 5%, everywhere else is a background color
+  &cornerChase, // light up corner (5%) and shoot upwards
+  &cornerChaseReverse, // light up corner (5%) and shoot downwards
 
   // Same from OG Bloom
   &twinkle, // set with lower density than OG Bloom

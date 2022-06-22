@@ -20,8 +20,8 @@
 #define WHITE_ON_COLOR 2
 #define BRIGHT_ON_COLOR 3
 
-#define NUM_SECONDS_DEFAULT 10
-#define NUM_SECONDS_TRANSITION 3
+#define NUM_SECONDS_DEFAULT 30
+#define NUM_SECONDS_TRANSITION 10
 
 // Incremented once per iteration of the loop
 unsigned long ticks = 0;
